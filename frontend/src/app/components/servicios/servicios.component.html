@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col s12 m6">
+    <form (ngSubmit)="agregarServicio(servicioForm)" #servicioForm="ngForm">
+      <input type="hidden" name="_id" [(ngModel)]="servicioService.selectedServicio._id" />
+
+      <div class="input-field">
+        <input type="text" name="nombre" [(ngModel)]="servicioService.selectedServicio.nombre" required />
+        <label class="active">Nombre del servicio</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" name="descripcion" [(ngModel)]="servicioService.selectedServicio.descripcion" required />
+        <label class="active">Descripción</label>
+      </div>
+
+      <div class="input-field">
+        <input type="number" name="precio" [(ngModel)]="servicioService.selectedServicio.precio" required />
+        <label class="active">Precio</label>
+      </div>
+
+      <button class="btn blue" type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <div class="col s12 m6">
+    <table class="highlight responsive-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servicio of servicioService.servicios">
+          <td>{{ servicio.nombre }}</td>
+          <td>{{ servicio.descripcion }}</td>
+          <td>{{ servicio.precio | currency:'COP' }}</td>
+          <td>
+            <button class="btn yellow darken-2" (click)="editarServicio(servicio)">
+              <i class="material-icons">edit</i>
+            </button>
+            <button
+              class="btn red darken-1"
+              (click)="eliminarServicio(servicio._id!)"
+              [disabled]="!servicio._id"
+            >
+              <i class="material-icons">delete</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

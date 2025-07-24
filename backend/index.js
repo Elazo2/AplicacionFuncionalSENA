@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(cors({ origin: '*' })); // Puedes restringirlo si tienes frontend definido
 
 // Rutas
-app.use('/api/usuarios', require('./routes/usuario.routes'));
+app.use('/api/auth', require('./routes/usuario.routes')); // login, registro, etc.
+app.use('/api/usuarios', require('./routes/usuarioCRUD.routes'));
 app.use('/api/productos', require('./routes/producto.routes'));
 app.use('/api/servicios', require('./routes/servicio.routes'));
 

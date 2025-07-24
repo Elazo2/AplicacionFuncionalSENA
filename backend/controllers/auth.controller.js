@@ -1,18 +1,18 @@
-const User = require('../models/user');
+const usuario = require('../models/usuario');
 const authCtrl = {};
 
 // Registrar usuario
 authCtrl.register = async (req, res) => {
-  const user = new User(req.body);
-  await user.save();
+  const usuario = new Usuario(req.body);
+  await usuario.save();
   res.json({ status: 'Usuario registrado' });
 };
 
 // Login básico
 authCtrl.login = async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username });
-  if (!user || user.password !== password) {
+  const usuario = await Usuario.findOne({ username });
+  if (!user || usuario.password !== password) {
     return res.status(401).json({ message: 'Credenciales inválidas' });
   }
   res.json({ message: 'Autenticación exitosa' });

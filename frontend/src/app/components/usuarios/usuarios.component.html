@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col s12 m6">
+    <form (ngSubmit)="agregarUsuario(usuarioForm)" #usuarioForm="ngForm">
+      <input type="hidden" name="_id" [(ngModel)]="usuarioService.selectedUsuario._id" />
+
+      <div class="input-field">
+        <input type="text" name="nombre" [(ngModel)]="usuarioService.selectedUsuario.nombre" required />
+        <label class="active">Nombre</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" name="cargo" [(ngModel)]="usuarioService.selectedUsuario.cargo" required />
+        <label class="active">Cargo</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" name="oficina" [(ngModel)]="usuarioService.selectedUsuario.oficina" required />
+        <label class="active">Oficina</label>
+      </div>
+
+      <div class="input-field">
+        <input type="number" name="salario" [(ngModel)]="usuarioService.selectedUsuario.salario" required />
+        <label class="active">Salario</label>
+      </div>
+
+      <button class="btn blue" type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <div class="col s12 m6">
+    <table class="highlight responsive-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cargo</th>
+          <th>Oficina</th>
+          <th>Salario</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarioService.usuarios">
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.cargo }}</td>
+          <td>{{ usuario.oficina }}</td>
+          <td>{{ usuario.salario | currency:'COP' }}</td>
+          <td>
+            <button class="btn yellow darken-2" (click)="editarUsuario(usuario)">
+              <i class="material-icons">edit</i>
+            </button>
+            <button
+              class="btn red darken-1"
+              (click)="eliminarUsuario(usuario._id!)"
+              [disabled]="!usuario._id"
+            >
+              <i class="material-icons">delete</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
