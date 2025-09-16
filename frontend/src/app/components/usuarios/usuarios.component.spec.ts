@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UsuariosComponent } from './usuarios.component';
+import { UsuarioService } from 'src/app/service/usuario.service';
 
 describe('UsuariosComponent', () => {
   let component: UsuariosComponent;
@@ -8,9 +10,10 @@ describe('UsuariosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsuariosComponent ]
-    })
-    .compileComponents();
+      declarations: [ UsuariosComponent ],
+      imports: [ FormsModule, HttpClientTestingModule ],
+      providers: [ UsuarioService ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +22,7 @@ describe('UsuariosComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('debería crearse el componente', () => {
     expect(component).toBeTruthy();
   });
 });
